@@ -93,7 +93,7 @@ class VideoDownloader:
                     pass
                 time.sleep(1)
 
-        self._driver.close()
+        self._driver.quit()
 
     def download(self, video_url):
         if self._timeout_seconds and 'linux' == platform.system().lower():
@@ -101,7 +101,7 @@ class VideoDownloader:
                 with time_limit(self._timeout_seconds):
                     self.__download__(video_url)
             except TimeoutException:
-                self._driver.close()
+                self._driver.quit()
                 print("time out")
         else:
             self.__download__(video_url)
