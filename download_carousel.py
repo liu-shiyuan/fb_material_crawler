@@ -65,7 +65,7 @@ class CarouselDownloader:
             get_logger().info('download carousel done: ' + src)
 
         take_carousel_screenshot(self._driver, store_path)
-        self._driver.close()
+        self._driver.quit()
 
     def download(self, carousel_url=None):
         if self._timeout_seconds and 'linux' == platform.system().lower():
@@ -73,7 +73,8 @@ class CarouselDownloader:
                 with time_limit(self._timeout_seconds):
                     self.__download__(carousel_url)
             except TimeoutException:
-                self._driver.close()
+                # close() may cause some problem, change to quit()
+                self._driver.quit()
                 print("time out")
         else:
             self.__download__(carousel_url)
