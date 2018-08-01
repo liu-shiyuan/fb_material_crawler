@@ -83,7 +83,7 @@ class PicDownloader:
         if is_video:
             raise NotBannerException(app_bag)
         take_banner_screenshot(self._driver, store_path)
-        self._driver.close()
+        self._driver.quit()
 
     def download(self, pic_url=None):
         if self._timeout_seconds and 'linux' == platform.system().lower():
@@ -91,7 +91,7 @@ class PicDownloader:
                 with time_limit(self._timeout_seconds):
                     self.__download__(pic_url)
             except TimeoutException:
-                self._driver.close()
+                self._driver.quit()
                 print("time out")
         else:
             self.__download__(pic_url)
