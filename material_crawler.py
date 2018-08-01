@@ -76,7 +76,7 @@ while True:
                     get_logger().error('Exception: ' + str(e))
             try:
                 if driver:
-                    driver.close()
+                    driver.quit()
             except WebDriverException as e:
                 get_logger().error('Exception occurred when close driver: ' + e.msg)
     else:
